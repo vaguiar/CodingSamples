@@ -2,3 +2,22 @@ CountNumberInversionsinArray
 ============================
 
 Sample code to count the number of inversions in an array of integers.
+The array is stored in a large text file and each integer is stored on a new line. 
+The range of all the elements in the array are from 1 - 10^5 with no elements repeating.
+
+Idea:
+====
+We know that merge sort is broken down into two steps.
+1) Splitting the array into sizes of n/2 in each step until it reaches an level at which each array has only one element.
+2) Combining (bottom-up) from the base case and merging the two arrays into one array double its size.
+
+Now for this algo, I deal only in the merging step.
+Here, while merging, if we pick values from the left array, then no inversion is recorded.
+But if we pick a value from the right array, then we have as many inversions as the number of remaining values in our left array.
+
+Simply incrementing the global inversion_counter at each of these occurances, gives us the total number of inversions.
+
+
+Time Complexity:
+===============
+The Fast Divide and Conquer algorithm piggybacks on merge sort to solve the problem in 0(nlogn) time.
