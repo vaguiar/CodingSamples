@@ -1,4 +1,11 @@
-// Author: vaguiar
+Coding Samples
+=====================
 
 This is public repo of some of my code snippets.
 The snippets are usually short implementations of some popular coding problems.
+
+Each folder has source code of the optimized algorithms for the coding problems. 
+Each project also has README which explains the algorithm, its nuances and its time and space complexity.
+
+Author : vaguiar
+===================
