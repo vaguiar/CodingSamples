@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename resource &apos;CountInversions/data/TestFile&apos; to &apos;TestFile.txt&apos;" description="Rename resource &apos;TestFile&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="data/TestFile" name="TestFile.txt" stamp="1360198154861" updateReferences="true"/>
-</session>

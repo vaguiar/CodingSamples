@@ -31,12 +31,14 @@ public class MainRunner {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("ERROR: Invalid or no Input");
+			MainRunner.main(null);
 		}
 	}
 
 	public static void runTestCase1(String ignore) {
 		
-		int [] input = new int[] { 6, 5, 4, 3, 2, 1 };
+		int [] input = new int[] { 1, 2, 3, 4, 5, 6 };
 		calculateComparisons(input);
 	}
 	
@@ -57,11 +59,10 @@ public class MainRunner {
 	public static void calculateComparisons(int [] input){
 		
 		QuickSortComparisons qc = new QuickSortComparisons();
-		
-		
-		
-		//ic.CountInversionAndSort(input, 0, input.length - 1);
-		//System.out.println("Inversion Count: " + ic.getInversionCount());
+		qc.sortAndCalculateComparisons(input, 2);
+		System.out.println("# comparisons: " + qc.getComparison_count());
+		System.out.print("Sorted Array: [ " );
+		printArray(input);
 	}
 	
 	public static void printArray(int[] A) {
