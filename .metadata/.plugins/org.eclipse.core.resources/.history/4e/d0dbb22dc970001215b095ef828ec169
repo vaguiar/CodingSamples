@@ -1,0 +1,71 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+public class MainRunner {
+
+	public static void main(String[] args) {
+
+		System.out.println("Menu:");
+		System.out.println("Test 1");
+		System.out.println("Test 2: with TestFile.txt");
+		System.out.println("Test 3: with IntegerArray.txt");
+		System.out.print("Enter test number: ");
+		
+		
+		int [] input;
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		try {
+			int choice = Integer.parseInt(br.readLine());
+
+			switch (choice) {
+			case 1:
+				runTestCase1();
+				break;
+			case 2:
+				runTestCase2("data/TestFile.txt");
+				break;
+			case 3:
+				runTestCase3("data/IntegerArray.txt");
+				break;
+			default:
+				break;
+			}
+
+			InversionCounter ic = new InversionCounter();
+			LoadFile lf = new LoadFile("data/IntegerArray.txt");
+
+			
+
+			// input = testCase1("Completely Inverted Array");
+			input = lf.loadFileInArray(lf.get_filename());
+
+			// System.out.print("Input arrays: [");
+			// printArray(input);
+
+			ic.CountInversionAndSort(input, 0, input.length - 1);
+
+			// System.out.print("Sorted array: [");
+			// printArray(input);
+
+			System.out.println("Inversion Count: " + ic.getInversionCount());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static int[] testCase2(String filename) {
+		LoadFile lf = new LoadFile(filename);
+		return lf.loadFileInArray(lf.get_filename());
+	}
+
+	public static void printArray(int[] A) {
+		for (int i = 0; i < A.length; i++) {
+			System.out.print(A[i] + "\t");
+		}
+		System.out.println("]");
+	}
+
+	public static int[] testCase1() {
+		return new int[] { 6, 5, 4, 3, 2, 1 };
+	}
+}

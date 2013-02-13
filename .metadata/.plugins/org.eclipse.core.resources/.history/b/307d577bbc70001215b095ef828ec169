@@ -1,0 +1,35 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.ArrayList;
+
+public class LoadFile {
+
+	private String filename;
+	
+	LoadFile (String filename){
+		this.filename = filename;
+	}
+	
+	//Getter method
+	public String get_filename(){
+		return this.filename;
+	}
+	
+	public int[] loadFileInArray(String filename){
+		
+		try {
+			ArrayList<Integer> input_list = new ArrayList();
+			BufferedReader br = new BufferedReader(new FileReader(filename));
+			String line;
+			
+			while((line = br.readLine()) != null){
+				input_list.add(Integer.parseInt(line));
+			}
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+}

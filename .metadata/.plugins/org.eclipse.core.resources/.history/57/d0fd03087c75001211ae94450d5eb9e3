@@ -1,0 +1,7 @@
+
+public class QuickSortComparisons {
+
+	private static long comparison_count = 0;
+	
+	
+}
