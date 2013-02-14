@@ -14,7 +14,6 @@ public class QuickSortComparisons {
 			sortWithPivotFirst(input, 0, input.length - 1);
 			break;
 
-		
 		case 2: // Case: select last element of array as pivot.
 			comparison_count = 0;
 			sortWithPivotLast(input, 0, input.length - 1);
@@ -22,12 +21,12 @@ public class QuickSortComparisons {
 
 		case 3: // Case: select median of 1st, middle and last elements as pivot
 			comparison_count = 0;
-			sortWithPivotMedian(input);
+			sortWithPivotMedian(input, 0, input.length - 1);
 			break;
-			
-		default: 
+
+		default:
 			comparison_count = 0;
-			sortWithPivotFirst(input, 0, input.length - 1);
+			break;
 		}
 	}
 
@@ -45,12 +44,12 @@ public class QuickSortComparisons {
 	private void sortWithPivotLast(int[] input, int left, int right) {
 
 		if (left < right && left != right) {
-			swapPositions(input, left, right);
+			swapElementsAtPositions(input, left, right);
 			int pivot_pos = partitionAtPivot(input, left, right);
 			comparison_count += right - left;
 
-			sortWithPivotFirst(input, left, pivot_pos - 1);
-			sortWithPivotFirst(input, pivot_pos + 1, right);
+			sortWithPivotLast(input, left, pivot_pos - 1);
+			sortWithPivotLast(input, pivot_pos + 1, right);
 		}
 	}
 
@@ -58,27 +57,37 @@ public class QuickSortComparisons {
 
 		if (left < right && left != right) {
 			int median_pos = findMedian(input, left, right);
-			swapPositions(input, left, median_pos);
+			swapElementsAtPositions(input, left, median_pos);
 			int pivot_pos = partitionAtPivot(input, left, right);
 			comparison_count += right - left;
 
-			sortWithPivotFirst(input, left, pivot_pos - 1);
-			sortWithPivotFirst(input, pivot_pos + 1, right);
+			sortWithPivotMedian(input, left, pivot_pos - 1);
+			sortWithPivotMedian(input, pivot_pos + 1, right);
 		}
 	}
 
-	private void swapPositions(int [] input, int pos1, int pos2){
-		input[pos1] = input[pos1] + input[pos2];
-		input[pos2] = input[pos1] - input[pos2];
-		input[pos1] = input[pos1] - input[pos2];
+	private void swapElementsAtPositions(int[] input, int pos1, int pos2) {
+		if (pos1 != pos2) {
+			input[pos1] = input[pos1] + input[pos2];
+			input[pos2] = input[pos1] - input[pos2];
+			input[pos1] = input[pos1] - input[pos2];
+		}
 	}
 
-	private int findMedian(int [] input, int pos1, int pos2){
-		
+	private int findMedian(int[] input, int pos1, int pos2) {
+		if (pos2 - pos1 == 1) {
+			return pos1;
+		}
+
+		int min_pos = pos1;
+		min_pos = input[pos1] > input[pos2] ? pos2 : pos1;
+		min_pos = input[(pos1 + pos2) / 2] < input[min_pos] ? min_pos
+				: (pos1 + pos2) / 2;
+		return min_pos;
 	}
-	
-	// Format Req: Do swap the first pos with your intended pivot while passing
-	// array to this function
+
+	// Format Req: Do swap the first position with your intended pivot
+	// while passing the array to this function
 	private int partitionAtPivot(int[] input, int left, int right) {
 
 		int pivot = input[left];
@@ -88,7 +97,8 @@ public class QuickSortComparisons {
 		for (int j = left + 1; j <= right; j++) {
 			if (input[j] <= pivot) {
 				if (i != j) {
-					swapPositions(input, i, j); // swap input[i] & input[j]
+					swapElementsAtPositions(input, i, j); // swap input[i] &
+															// input[j]
 				}
 				i++; // increment i to point to the new partition point
 			}
@@ -98,7 +108,7 @@ public class QuickSortComparisons {
 		// The "if" statement optimizes the swaps only if we are talking abt
 		// diff values for i-1 and left
 		if (left != i - 1) {
-			swapPositions(input, left, i-1);
+			swapElementsAtPositions(input, left, i - 1);
 		}
 
 		return (i - 1);

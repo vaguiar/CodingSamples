@@ -1,0 +1,84 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+public class MainRunner {
+
+	public static void main(String[] args) {
+
+		System.out.println("== Code Input ==");
+		System.out.println("1 -> Array Input \n 2 -> Test File");
+		System.out.print("Enter test type: ");
+
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		try {
+			int choice = Integer.parseInt(br.readLine());
+
+			switch (choice) {
+			case 1:
+				System.out.println("\n Enter Array elements seperated by space: ");
+				String [] string_vals = br.readLine().split(" +");
+				int [] input = convertToIntArray(string_vals);
+				QuickSortforInputArray(input);
+				break;
+			case 2:
+				System.out.println("\n Enter the filepath for input file");
+				String filepath = br.readLine();
+				displayPivotOptions();
+				int pivotting_type = Integer.parseInt(br.readLine());
+				QuickSortforFilepath(filepath, pivotting_type);
+				break;
+			default:
+				System.out.println("ERROR: Invalid Choice");
+				MainRunner.main(null);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("ERROR: Invalid or no Input");
+			MainRunner.main(null);
+		}
+	}
+
+	private static void displayPivotOptions(){
+		System.out.println("Choose from the following pivotting options");
+		System.out.println("1 - > First element as pivot");
+		System.out.println("2 - > Last element as pivot");
+		System.out.println("3 - > Median of first, last and middle elements as pivot");
+	}
+	
+	private static int [] convertToIntArray(String [] vals){
+		
+		int [] input = new int[vals.length];
+		for(int i = 0; i < vals.length; i++){
+			input[i] = Integer.parseInt(vals[i]);
+		}		
+		return input;
+	}
+	
+	private static void QuickSortforInputArray(int [] input) {
+		calculateComparisons(input);
+	}
+
+	public static void QuickSortforFilepath(String filepath) {
+
+		LoadFile lf = new LoadFile(filepath);
+		int[] input = lf.loadFileInArray(lf.get_filename());
+		calculateComparisons(input);
+	}
+
+	public static void calculateComparisons(int[] input) {
+
+		QuickSortComparisons qc = new QuickSortComparisons();
+		qc.sortAndCalculateComparisons(input, 3);
+		System.out.println("# comparisons: " + qc.getComparison_count());
+		System.out.print("Sorted Array: [ ");
+		printArray(input);
+	}
+
+	public static void printArray(int[] A) {
+		for (int i = 0; i < A.length; i++) {
+			System.out.print(A[i] + "\t");
+		}
+		System.out.println("]");
+	}
+}
