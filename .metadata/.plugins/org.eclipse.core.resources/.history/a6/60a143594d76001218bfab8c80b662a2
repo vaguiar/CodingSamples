@@ -37,9 +37,8 @@ public class MainRunner {
 				QuickSortforInputArray(input1, 3);
 			default:
 				System.out.println("ERROR: Invalid Choice");
-				break;
+				MainRunner.main(null);
 			}
-			MainRunner.main(null);
 
 		} catch (Exception e) {
 			e.printStackTrace();

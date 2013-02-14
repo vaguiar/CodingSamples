@@ -74,7 +74,6 @@ public class QuickSortComparisons {
 		}
 	}
 
-	// Finds the median of three integers with max two comparisons.
 	private int findMedian(int[] input, int pos1, int pos2) {
 		if (pos2 - pos1 == 1) {
 			return pos1;
@@ -88,7 +87,7 @@ public class QuickSortComparisons {
 			return pos2; // since b is the median
 		}else{
 			int f = c - a;
-			if((e^f)< 0){
+			if(e^f < 0){
 				return pos1; // since a is the median
 			}else
 				return (pos1 + pos2)/2; // since c is the median

@@ -39,7 +39,6 @@ public class MainRunner {
 				System.out.println("ERROR: Invalid Choice");
 				break;
 			}
-			MainRunner.main(null);
 
 		} catch (Exception e) {
 			e.printStackTrace();
